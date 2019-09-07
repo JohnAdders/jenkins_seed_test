@@ -1,16 +1,10 @@
 def gitUrl = "https://github.com/JohnAdders/jenkinsfile_test.git"
 
-job("Jenkinsfile.test.project") {
-    description "Builds Project from master branch."
-    scm {
+multibranchPipelineJob('Jenkinsfile.test.project') {
+    branchSources {
         git {
-            remote {
-                url gitUrl
-                branch "origin/master"
-            }
+            id('123456789') // IMPORTANT: use a constant and unique identifier
+            remote(gitUrl)
         }
-    }
-    steps {
-        shell "echo Look: I'm building master!"
     }
 }
